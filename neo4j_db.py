@@ -64,30 +64,67 @@ def delete_pet_node(node_id):
 
     return node_id
 
+def display_menu():
+    print("Menu:")
+    print("1. Create a Person")
+    print("2. Create a Pet")
+    print("3. Establish ownership relationship")
+    print("4. Get all Pets")
+    print("5. Get all Persons")
+    print("6. Update a Person's name")
+    print("7. Update a Pet's name")
+    print("8. Delete a Person")
+    print("9. Delete a Pet")
+    print("0. Exit")
+    print()
+
+def main():
+    while True:
+        display_menu()
+        choice = input("Enter your choice: ")
+
+        if choice == '1':
+            person_name = input("Enter the name of the person: ")
+            person_id = create_person(person_name)
+            print("Person created with ID:", person_id)
+        elif choice == '2':
+            pet_name = input("Enter the name of the pet: ")
+            pet_id = create_pet(pet_name)
+            print("Pet created with ID:", pet_id)
+        elif choice == '3':
+            person_id = int(input("Enter the ID of the person: "))
+            pet_id = int(input("Enter the ID of the pet: "))
+            amount_of_pet = int(input("Enter the amount of pet: "))
+            create_owns_pet_relationship(person_id, pet_id, amount_of_pet)
+            print("Established 'OWNS_PET' relationship with amount:", amount_of_pet)
+        elif choice == '4':
+            pets = get_all_pets()
+            print("All Pets:", pets)
+        elif choice == '5':
+            persons = get_all_persons()
+            print("All Persons:", persons)
+        elif choice == '6':
+            node_id = int(input("Enter the ID of the person to update: "))
+            new_name = input("Enter the new name for the person: ")
+            new_person_name = update_person_node_name(node_id, new_name)
+            print("Person node updated with new name:", new_person_name)
+        elif choice == '7':
+            node_id = int(input("Enter the ID of the pet to update: "))
+            new_name = input("Enter the new name for the pet: ")
+            new_pet_name = update_pet_node_name(node_id, new_name)
+            print("Pet node updated with new name:", new_pet_name)
+        elif choice == '8':
+            node_id = int(input("Enter the ID of the person to delete: "))
+            deleted_person_id = delete_person_node(node_id)
+            print("Person node deleted with ID:", deleted_person_id)
+        elif choice == '9':
+            node_id = int(input("Enter the ID of the pet to delete: "))
+            deleted_pet_id = delete_pet_node(node_id)
+            print("Pet node deleted with ID:", deleted_pet_id)
+        elif choice == '0':
+            break
+        else:
+            print("Invalid choice. Please try again.")
+
 if __name__ == "__main__":
-
-    person_id = create_person("Jake")
-    pet_id = create_pet("Cat")
-
-    amount_of_pet = 2000  # For example, indicating ownership strength
-    create_owns_pet_relationship(person_id, pet_id, amount_of_pet)
-    print("Created 'OWNS_PET' relationship with amount:", amount_of_pet)
-
-    pets = get_all_pets()
-    print("All Pets:", pets)
-
-    persons = get_all_persons()
-    print("All Persons:", persons)
-
-    new_person_name = update_person_node_name(0, "John")
-    print("Person node updated with new name:", new_person_name)
-
-    
-    new_pet_name = update_pet_node_name(1, "Dog")
-    print("Pet node updated with new name:", new_pet_name)
-
-    person_id =  delete_person_node(2)
-    print("Pet node deleted with ID:", person_id)
-
-    pet_id =  delete_pet_node(3)
-    print("Pet node deleted with ID:", pet_id)
+    main()
